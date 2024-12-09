@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "box-hero": "#FFF3E3",
+        "box-write":"#B88E2F",
+        "bg-box":"#F4F5F7",
+        "carousel":"#FCF8F3" // Named as "box-hero" color
+      },
+   
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

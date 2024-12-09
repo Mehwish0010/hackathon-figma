@@ -1,0 +1,92 @@
+/* Main container */
+.container {
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    width: 1200px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    padding:10px;
+  }
+  
+  /* Common box styling */
+  .box {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Image styling */
+  .image {
+    object-fit: cover;
+  }
+  
+  /* Specific box spans */
+  .bookshelf {
+    grid-row: span 2;
+    grid-column: span 1;
+    height:540px ;
+    width:350px ;
+
+  }
+  
+  .laptop {
+    grid-row: span 1;
+    grid-column: span 2;
+    margin-right: 20px;
+    width: 350px;
+    height: 250px;
+    margin-right: 60px;
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-left: 30px;
+  }
+  
+  .bedroom {
+    grid-row: span 1;
+    grid-column: span 1;
+    height: 300px;
+    width: 350px;
+    margin-right: 24px;
+  }
+  
+  .diningRoom {
+    grid-row: span 1;
+    grid-column: span 2;
+    height: 338px;
+    width: 438px;
+  }
+  
+  .kitchen {
+    grid-row: span 2;
+    grid-column: span 1;
+    height: 300px;
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 12px;
+  }
+  
+  .chair {
+    grid-row: span 1;
+    grid-column: span 1;
+    height: 350px;
+    width: 400px;
+    margin-bottom: 60px;
+
+  }
+  
+  .vase {
+    grid-row: span 1;
+    grid-column: span 1;
+    height: 200px;
+    width: 300px;
+    margin-right: 80px;
+    margin-bottom: 80px;
+  }
+  
+  .frame {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  
