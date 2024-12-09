@@ -77,7 +77,7 @@ const features = [
     description: 'Over 2 years'
   },
   {
-    icon: {Frame},
+    icon: "nnn/mm//",
     title: 'Free Shipping',
     description: 'Order over 150 $'
   },
@@ -321,7 +321,7 @@ export default function ShopHeader() {
               className="flex items-center gap-4 pl-8 md:pl-0"
             >
               <div className="mb-4">
-                <Image
+              <Image
                   src={feature.icon}
                   alt={feature.title}
                   width={60}
