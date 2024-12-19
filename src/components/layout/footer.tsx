@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-40 py-12 px-4 font-poppins text-center md:text-start">
-      <div className="max-w-[1440px] mx-auto">
+    <footer className="w-full mt-10 py-12 px-4 font-poppins text-center md:text-start pt-8 border-t border-[#D9D9D9]">
+      <div className="max-w-[1440px] mx-auto mt-10 py-30">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Logo and Address */}
           <div className="space-y-6">
