@@ -1,15 +1,16 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Pic from "@/components/assets/Rectangle 24.png"
+import Pic from "@/components/assets/Rectangle 24.png";
 
 const SectionWithThreeDivs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    "/image 1.png", // Replace with actual image paths
-    "/image 2.png",
-    "/image 3.png",
+    "/assets/Rectangle%2024.png",
+    "/assets/image%201.png",
+    "/assets/image%202(1).png",
+    "/assets/image%203.png",
   ];
 
   const handleNext = () => {
@@ -17,26 +18,28 @@ const SectionWithThreeDivs = () => {
   };
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
-    <section className="flex gap-4 p-10 bg-carousel h-[500px]">
+    <section className="flex flex-col lg:flex-row gap-6 p-6 bg-carousel h-auto">
       {/* First Div */}
-      <div className="flex flex-col items-center justify-center w-1/3 bg-carousel  rounded-xl text-center">
-        <h2 className="text-2xl font-extrabold text-gray-800">50+ Beautiful rooms<br/> <span  className="mr-28">inspiration</span></h2>
-        <p className="mt-4 text-box-write text-sm ml-12">
-   Our designer already made a alot of beautiful prototipe of rooms that inspire you.
+      <div className="flex flex-col items-center justify-center w-full lg:w-1/3 bg-carousel rounded-xl text-center p-6">
+        <h2 className="text-xl lg:text-2xl font-extrabold text-gray-800">
+          50+ Beautiful rooms <br />
+          <span>inspiration</span>
+        </h2>
+        <p className="mt-4 text-box-write text-sm lg:text-base">
+          Our designers have already created many beautiful prototypes of rooms
+          to inspire you.
         </p>
-        <button className="px-8 mr-28 py-2 mt-6 text-white bg-box-write rounded hover:bg-slate-400">
+        <button className="px-6 py-2 mt-6 text-white bg-box-write rounded hover:bg-slate-400">
           Explore More
         </button>
       </div>
 
       {/* Second Div */}
-      <div className="relative w-1/3 bg-gray-300 shadow-md rounded-lg overflow-hidden">
+      <div className="relative w-full lg:w-1/3 bg-gray-300 shadow-md rounded-lg overflow-hidden">
         <Image
           src={Pic}
           alt="Main image"
@@ -45,16 +48,15 @@ const SectionWithThreeDivs = () => {
           className="rounded-lg"
         />
         {/* Small Box */}
-        <div className="absolute top-4 left-4 bg-white bg-opacity-60 shadow-md rounded py-4 px-10 mt-64 ">
-          <h3 className="text-sm font-medium ml-6 mt-6 text-gray-800">01  Bed Room
-          </h3>
-          <h2 className="text-3xl text-extrabold mt-2 ">Inner Peace</h2>
+        <div className="absolute bottom-4 left-4 bg-white bg-opacity-80 shadow-md rounded py-4 px-6">
+          <h3 className="text-sm font-medium text-gray-800">01 Bedroom</h3>
+          <h2 className="text-2xl font-bold text-gray-900">Inner Peace</h2>
         </div>
       </div>
 
       {/* Third Div */}
-      <div className="w-1/3">
-        <div className="relative h-[75%] bg-white shadow-md rounded-lg overflow-hidden flex items-center justify-center">
+      <div className="w-full lg:w-1/3 flex flex-col items-center">
+        <div className="relative h-64 lg:h-[75%] bg-white shadow-md rounded-lg overflow-hidden flex items-center justify-center">
           {/* Carousel */}
           <Image
             src={images[currentIndex]}
@@ -63,16 +65,34 @@ const SectionWithThreeDivs = () => {
             objectFit="cover"
             className="rounded-lg"
           />
-          {/* Carousel Controls */}
+
+          {/* Bullet Indicators */}
+          <div className="absolute bottom-4 flex space-x-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full ${
+                  index === currentIndex
+                    ? "bg-black"
+                    : "bg-gray-400 hover:bg-gray-500"
+                }`}
+              ></button>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex space-x-4 mt-4">
           <button
-            className="absolute left-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded hover:bg-opacity-75"
             onClick={handlePrev}
+            className="px-4 py-2 bg-box-write text-white rounded hover:bg-slate-400"
           >
             Prev
           </button>
           <button
-            className="absolute right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded hover:bg-opacity-75"
             onClick={handleNext}
+            className="px-4 py-2 bg-box-write text-white rounded hover:bg-slate-400"
           >
             Next
           </button>
@@ -83,3 +103,4 @@ const SectionWithThreeDivs = () => {
 };
 
 export default SectionWithThreeDivs;
+

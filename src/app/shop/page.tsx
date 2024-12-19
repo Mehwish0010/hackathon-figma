@@ -2,28 +2,40 @@
 'use client'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { Share2, Heart, BarChart2, ChevronLeft, ChevronRight } from 'lucide-react'
 import Pic from "@/components/assets/Rectangle 1.png"
-import Frame from "@/components/assets/Frame 2.png"
+import Logo2 from "@/components/assets/Group.png"
+import Pic1 from "@/components/assets/shop1.png"
+import Pic2 from "@/components/assets/shop2.png"
+import Pic3 from "@/components/assets/shop3.png"
+import Pic4 from "@/components/assets/shop4.png"
+import Logo from "@/components/assets/cup.png"
+import Logo3 from "@/components/assets/shipping.png"
+import Logo4 from "@/components/assets/customer-support.png"
+
+
+
+
 interface Product {
-  id: string
-  name: string
-  image: string
-  category: string
-  price: number
-  originalPrice?: number
+  id: string;
+  name: string;
+  image: StaticImageData | string; // Supports both imported images and URL strings
+  category: string;
+  price: number;
+  originalPrice?: number;
   badge?: {
-    text: string
-    color: string
-  }
+    text: string;
+    color: string;
+  };
 }
+
 
 const baseProducts: Product[] = [
   {
       id: '1',
       name: 'Syltherine',
-      image: '/images/syltherine.png',
+      image: Pic1,
       category: 'Stylish cafe chair',
       price: 2500000,
       originalPrice: 3500000,
@@ -35,14 +47,14 @@ const baseProducts: Product[] = [
   {
       id: '2',
       name: 'Leviosa',
-      image: '/assets/',
+      image: Pic2,
       category: 'Stylish cafe chair',
       price: 2500000
   },
   {
       id: '3',
       name: 'Lolito',
-      image: '/images/lolito.png',
+      image:Pic3 ,
       category: 'Luxury big sofa',
       price: 7000000,
       originalPrice: 14000000,
@@ -54,7 +66,7 @@ const baseProducts: Product[] = [
   {
       id: '4',
       name: 'Respira',
-      image: '/images/respira.png',
+      image: Pic4,
       category: 'Outdoor bar table and stool',
       price: 500000,
       badge: {
@@ -67,22 +79,22 @@ const products: Product[] = Array(4).fill(baseProducts).flat();
 
 const features = [
   {
-    icon: '/images/look.png',
+    icon: Logo,
     title: 'High Quality',
     description: 'crafted from top materials'
   },
   {
-    icon: '/images/frame.png',
+    icon: Logo2,
     title: 'Warranty Protection',
     description: 'Over 2 years'
   },
   {
-    icon: "nnn/mm//",
+    icon: Logo3,
     title: 'Free Shipping',
     description: 'Order over 150 $'
   },
   {
-    icon: '/images/support.png',
+    icon: Logo4,
     title: '24 / 7 Support',
     description: 'Dedicated support'
   }

@@ -1,39 +1,35 @@
-import React from 'react'
-import Image from 'next/image'
-import Poster from "@/components/assets/hero_endframe__cvklg0xk3w6e_large 2.png"
-import Apple from "@/components/assets/1200px-Apple_gray_logo 1.png"
+import React from "react";
+import Pic from "@/components/assets/scandinavian-interior-mockup-wall-decal-background 1.png";
+import Image from "next/image";
 
-const Hero = () => {
+const HeroSection = () => {
   return (
-    <div>  <section className="flex flex-col md:flex-row items-center justify-between w-[892] h-[344] bg-black p-4 md:p-22">
-    {/* Left Section: Text */}
-    <div className="flex-1 mb-6 md:mb-0 md:pr-8 h-[120] w-[294] ml-40   ">
-    <div className="flex items-center space-x-4">
-  <Image src={Apple} alt="logo" height={49} width={40} className='mb-7 mr-3' />
-  <p className="text-lg text-white mb-6 ml-8">iPhone 14 Series</p>
-</div>
-      <h1 className="text-6xl md:text-5xl font-bold h-[120] w-[294] text-white  leading-loose  tracking-wider mb-4">
-        Up to 10% <br/> off Voucher 
-      </h1>
-     
-     <button className='w-[113] h-[28] bg-black text-white underline sapce-x-2'>
-Shop Now
-     </button>
-    </div>
-
-    {/* Right Section: Image */}
-    <div className="flex-1 flex justify-center mr-26 h-[352] w-[496]">
-      <Image
-        src={Poster}
-        alt="Hero Image"
-        width={700}
-        height={400}
-        className="rounded-lg shadow-lg "
+    <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden">
+      <Image 
+        src={Pic} 
+        alt="poster" 
+        layout="fill" 
+        objectFit="cover" 
+        objectPosition="center" 
+        className="absolute inset-0"
       />
+      
+      {/* Content Box on the Right */}
+      <div className="absolute top-1/2 right-4 md:right-12 transform -translate-y-1/2 bg-box-hero p-4 md:p-6 rounded-lg shadow-lg w-[90%] sm:w-[70%] md:w-[543px] h-auto">
+        <p className="text-black text-sm sm:text-base md:text-lg">Welcome to Our Platform</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-box-write mt-2 sm:mt-4">
+          Discover Our New Collection
+        </h1>
+        <p className="text-gray-700 mt-2 sm:mt-4 text-sm sm:text-base">
+          Join us to explore amazing opportunities and grow your skills with
+          top-notch resources.
+        </p>
+        <button className="mt-4 sm:mt-6 px-4 py-2 sm:px-6 sm:py-3 bg-box-write text-white rounded-md hover:bg-blue-600 transition-all duration-300">
+          Get Started
+        </button>
+      </div>
     </div>
-  </section></div>
-  )
-}
-  
+  );
+};
 
-export default Hero
+export default HeroSection;

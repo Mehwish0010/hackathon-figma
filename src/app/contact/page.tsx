@@ -1,23 +1,30 @@
 import Image from 'next/image'
 import Pic from "@/components/assets/Rectangle 1.png"
+import Logo1 from "@/components/assets/cup.png"
+import Logo2 from "@/components/assets/Group.png"
+import Logo3 from "@/components/assets/shipping.png"
+import Logo4 from "@/components/assets/customer-support.png"
+import Icon1 from "@/components/assets/address.png"
+import Icon2 from "@/components/assets/bxs_phone.png"
+import Icon3 from "@/components/assets/bi_clock-fill(1).png"
 const features = [
     {
-      icon: '/images/trophy.png',
+      icon: Logo1,
       title: 'High Quality',
       description: 'crafted from top materials'
     },
     {
-      icon: '/images/tick.png',
+      icon: Logo2,
       title: 'Warranty Protection',
       description: 'Over 2 years'
     },
     {
-      icon: '/images/gift.png',
+      icon: Logo3,
       title: 'Free Shipping',
       description: 'Order over 150 $'
     },
     {
-      icon: '/images/support.png',
+      icon: Logo4,
       title: '24 / 7 Support',
       description: 'Dedicated support'
     }
@@ -37,7 +44,7 @@ export default function ContactPage() {
        
         className="object-cover h-[400] w-[full] "
       />
-        <h1 className="text-3xl md:text-4xl font-poppinsSemiBold mb-4">Get In Touch With Us</h1>
+        <h1 className="text-3xl  mt-20 md:text-4xl font-poppinsSemiBold mb-4">Get In Touch With Us</h1>
         <p className="text-gray-600 text-sm text-lightGray max-w-xl mx-auto">
           For More Information About Our Product & Services. Please Feel Free To Drop Us
           An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!
@@ -51,7 +58,7 @@ export default function ContactPage() {
           <div className="flex items-start gap-4">
             <div className="relative w-12 h-12 flex-shrink-0">
               <Image
-                src="/images/address.png"
+                src={Icon1}
                 alt="Address icon"
                 height={20}
                 width={20}
@@ -71,7 +78,7 @@ export default function ContactPage() {
           <div className="flex items-start gap-4">
             <div className="relative w-12 h-12 flex-shrink-0">
               <Image
-                src="/images/phone.png"
+                src={Icon2}
                 alt="Phone icon"
                 height={20}
                 width={20}
@@ -92,7 +99,7 @@ export default function ContactPage() {
           <div className="flex items-start gap-4">
             <div className="relative w-12 h-12 flex-shrink-0">
               <Image
-                src="/images/time.png"
+                src={Icon3}
                 alt="Time icon"
                 height={20}
                 width={20}
@@ -118,7 +125,7 @@ export default function ContactPage() {
               <input
                 
                 type="text"
-                placeholder="Abc"
+                placeholder="Enter your name"
                 className="w-full px-3 py-5 border border-lightGray rounded-lg"
               />
             </div>
@@ -127,7 +134,7 @@ export default function ContactPage() {
               <label className="block text-sm">Email address</label>
               <input
                 type="email"
-                placeholder="Abc@def.com"
+                placeholder="Enter your email account"
                 className="w-full px-3 py-5 border border-lightGray rounded-lg"
               />
             </div>
@@ -136,7 +143,7 @@ export default function ContactPage() {
               <label className="block text-sm">Subject</label>
               <input
                 type="text"
-                placeholder="This is an optional"
+                placeholder="Subject you want to discuss"
                 className="w-full px-3 py-5 border border-lightGray rounded-lg"
               />
             </div>
