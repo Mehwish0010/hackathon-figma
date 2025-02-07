@@ -12,10 +12,10 @@ export const product = defineType({
             type: "string"
         },
         {
-            name:"description",
-            type:"text",
+            name: "description",  // Fixed spelling (was "discription" in interface)
+            type: "text",
             validation: (rule) => rule.required(),
-            title:"Description",
+            title: "Description",
         },
         {
             name: "productImage",
@@ -23,6 +23,21 @@ export const product = defineType({
             validation: (rule) => rule.required(),
             title: "Product Image"
         },
+        {
+            name: "slug",
+            type: "slug",
+            title: "Slug",
+            validation: (Rule) => Rule.required(),
+            options: {
+                source: "title", // Generates slug from title automatically
+                maxLength: 200,  // Prevents long URLs
+                slugify: (input) => input
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")  // Replace spaces with hyphens
+                    .slice(0, 200)
+            }
+        }
+        ,
         {
             name: "price",
             type: "number",
@@ -36,14 +51,19 @@ export const product = defineType({
             of: [{ type: "string" }]
         },
         {
-            name:"dicountPercentage",
-            type:"number",
-            title:"Discount Percentage",
+            name: "discountPercentage",  // Fixed spelling (was "dicountPercentage")
+            type: "number",
+            title: "Discount Percentage",
         },
         {
-            name:"isNew",
-            type:"boolean",
-            title:"New Badge",
+            name: "inventory",
+            type: "number",
+            title: "Inventory",
+        },
+        {
+            name: "isNew",
+            type: "boolean",
+            title: "New Badge",
         }
     ]
 })

@@ -1,82 +1,21 @@
-import React from 'react'
+"use client";
+import React, { use, useEffect, useState } from 'react'
+import { Product } from '../../../types/products';
+import { client } from '@/sanity/lib/client';
+import { allProducts, four, full } from '@/sanity/lib/queries';
+import Image from 'next/image';
+import { url } from 'inspector';
+import { urlFor } from '@/sanity/lib/image';
 
-import Pic from "@/components/assets/image 1.png"
-import Pic2 from"@/components/assets/image 2(1).png"
-import Pic3 from "@/components/assets/image 3.png"
-import Best_Seller_Box from '@/components/widgets/box'
-import Pic4 from "@/components/assets/sofaset.png"
-import Pic5 from "@/components/assets/vasedown.png"
-import Pic6 from "@/components/assets/chairss.png"
-import Pic7 from "@/components/assets/lamp.png"
-import Pic8 from "@/components/assets/sofa1.png"
-import Pic9 from "@/components/assets/sofa2.png"
-import Pic10 from "@/components/assets/sofa3.png"
 const Products = () => {
-  const best_Sell=[
-    {id:1,
-      src: Pic5,
-      alt: "furniture",
-      title: "Syltherine",
-      description: "Stylish cafe Chair",
-      price:2500.000,
-  },
-  {id:2,
-    src: Pic6,
-    alt: "shoes",
-    title: "Formal Court Shoes IF5005-GREEN",
-    description: "Top Notch shoes for women",
-    price:5000
-}
-,{id:3,
-    src: Pic3,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },{id:4,
-    src: Pic4,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },
-  {id:5,
-    src: Pic7,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },
-  {id:6,
-    src: Pic8,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },
-  {id:7,
-    src: Pic9,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },
-  {id:8,
-    src: Pic10,
-    alt: "dress",
-    title: "Kidz Wear",
-    description: "Printed Khaddar Shirt",
-    price:2250
-    
-  },
-    
-];
-
+  const [product, setProduct] = useState<Product[]>([])
+  useEffect(() => {
+    async function fetchProducts() {
+      const fetchedProducts : Product[]= await client.fetch(full)
+      setProduct(fetchedProducts)
+    }
+    fetchProducts()
+  },[])
   return (
     <div className="text-myhover mb-[100px] mt-[100px] body-font">
 
@@ -89,19 +28,31 @@ const Products = () => {
 </div>
 
 {/*card*/}
-<div className=' flex flex-wrap justify-center gap-5 p-2 ml-2 '>
-{
-  best_Sell.map((item) =>(
-    <Best_Seller_Box key={item.id} src={ item.src} alt={item.alt}  title={item.title}  description={item.description} price={item.price}/>
-  ))
-}
-</div>
-<div className="flex justify-center mt-10">
-        <button className="px-20 py-2 border-box-write border-2 text-box-write font-bold rounded hover:bg-blue-700 transition">
-          Shop Now
-        </button>
-      </div>
+<div className='max-w-6xl mx-auto px-4 py-8 '>
+  
+  <div className='grid grid-col-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+{product.map((product) => (
+  <div key={product._id} className='border rounded-lg shadow-md p-4 hover:shadow-lg transition duration-200'>
+  
+  
+    {product.productImage?.asset && (
+      <Image  
+        src={urlFor(product.productImage).url()} 
+        alt={product.title || "Product"} 
+        width={300} 
+        height={300}
+        className='w-full h-48 object-cover rounded-md'
+      />
+    )}
+    <h1 className='text-lg font-semibold mt-4'>
+      {product.title}</h1>
+      <p className='text-gray-500 mt-2 font-semibold'>
+       ${product.price}</p>
 
+    </div>
+))}
+     </div>
+    </div>
     </div>
   )
 }

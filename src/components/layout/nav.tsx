@@ -9,6 +9,9 @@ import Pic from "@/components/assets/Meubel House_Logos-05.png";
 import Pic2 from "@/components/assets/Vector.png";
 import Pic3 from "@/components/assets/akar-icons_search.png";  
 import Pic4 from "@/components/assets/akar-icons_heart.png";
+import { FiShoppingCart } from "react-icons/fi"
+import { IoCartOutline } from "react-icons/io5"
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
 import Pic5 from "@/components/assets/ant-design_shopping-cart-outlined.png";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,9 +21,14 @@ export default function Navbar() {
   const toggleCartMenu = () => {
     setIsCartMenuOpen((prev) => !prev);
   };
+  const cartItemCount = 2;
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <>
+    <div>
       <nav className="bg-white shadow-md font-poppins relative ">  
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
@@ -33,44 +41,45 @@ export default function Navbar() {
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex md:items-center sm:space-x-8">
-              <Link href="/" className="text-gray-800 hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
+              <Link href="/" className="text-gray-800 font-bold hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
                 Home
               </Link>
-              <Link href="/shop" className="text-gray-800 hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
+              <Link href="/shop" className="text-gray-800 font-bold hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
                 Shop
               </Link>
-              <Link href="/blog" className="text-gray-800 hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
+              <Link href="/blog" className="text-gray-800 font-bold hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
                 Blog
               </Link>
-              <Link href="/contact" className="text-gray-800 hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
+              <Link href="/contact" className="text-gray-800 font-bold hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
                 Contact
               </Link>
             </div>
 
             {/* Icons */}
             <div className="hidden md:flex md:items-center sm:space-x-9">
-              <Link href="#" className="text-gray-800 hover:text-gray-600">
+              <Link href="/checkout" className="text-gray-800 hover:text-gray-600">
                 <Image src={Pic2} alt="Account" width={22} height={22} quality={100} />
               </Link>
               <Link href="#" className="text-gray-800 hover:text-gray-600">
                 <Image src={Pic3} alt="Search" width={22} height={22} quality={100} />
               </Link>
-              <Link href="#" className="text-gray-800 hover:text-gray-600">
+              <Link href="/wishlist" className="text-gray-800 hover:text-gray-600">
                 <Image src={Pic4} alt="Favorites" width={22} height={22} quality={100} />
               </Link>
               {/* Cart Icon */}
-              <button
-                className="text-gray-800 hover:text-gray-600 relative"
-                onClick={toggleCartMenu}
-              >
-
-
-
-                <Image src={Pic5} alt="Favorites" width={22} height={22} quality={100} />
-              {counter?.cartCount !== null && counter?.cartCount > 0 &&(
-            <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              { counter?.cartCount ?? 0}</span>)}
-              </button>
+              <Link href="/cart1">
+            <button
+              className="text-gray-800 hover:text-gray-600 relative"
+              onClick={toggleCartMenu}
+            >
+              <Image src={Pic5} alt="Favorites" width={22} height={22} quality={100} />
+              {counter?.cartCount !== null && counter?.cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {counter?.cartCount ?? 0}
+                </span>
+              )}
+            </button>
+            </Link>
             </div>
 
 
@@ -141,27 +150,37 @@ export default function Navbar() {
             <Link href="#" className="text-gray-800 hover:text-gray-600">
                 <Image src="/images/heart-icon.png" alt="Favorites" width={22} height={22} quality={100} />
               </Link>
-              {/* Cart Icon */}
-              <button
-                className="text-gray-800 hover:text-gray-600 relative"
-                onClick={toggleCartMenu}
-              >
-                <Image src="/images/cart-icon.png" alt="Favorites" width={22} height={22} quality={100} />
-            <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              2 </span>
-              </button>
-              </div>
+              
+              <div className="relative">   <Link href="/cart1" className="hover:underline font-bold"><button className="btn btn-ghost">
+          <IoCartOutline size={20} />
+        </button>
+        </Link>
+
+        {/* Hamburger Icon */}
+        <button
+          className="text-black text-xl md:hidden"
+          onClick={toggleCartMenu}
+        >
+          {isMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+        </button>
+      </div>
+
+      {/* Dropdown Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md md:hidden">
+          <div className="flex flex-col items-center gap-4 py-4">
+            <Link href="/" className="text-black font-medium" onClick={toggleMenu}>Home</Link>
+            <Link href="/shop" className="text-black font-medium" onClick={toggleMenu}>Shop</Link>
+            <Link href="/contact" className="text-black font-medium" onClick={toggleMenu}>Contact</Link>
+            <Link href="/blog" className="text-black font-medium" onClick={toggleMenu}>Blog</Link>
           </div>
         </div>
-
-        {/* Cart Menu */}
-        {isCartMenuOpen && (
-          <div className="absolute top-0 right-0 z-50">
-            <CartMenu onClose={() => setIsCartMenuOpen(false)} />
-
+      )}
+            </div>
           </div>
-        )}
+        </div>
       </nav>
-    </>
+      {isCartMenuOpen && <CartMenu onClose={() => setIsCartMenuOpen(false)} />}
+    </div>
   );
-}
+};
