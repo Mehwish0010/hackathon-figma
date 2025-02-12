@@ -1,58 +1,94 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
+import { useWishlist } from "../context/WishlistContext";
+import { useCounter } from "../context/CartCounter";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronRight, X } from "lucide-react";
+import toast from "react-hot-toast";
 
-const wishlistItems = [
-  {
-    id: 1,
-    name: 'Asgaard Sofa',
-    price: 'Rs. 250,000.00',
-    image: '/images/asgaard-sofa.png',
-  },
-  {
-    id: 2,
-    name: 'Oak Coffee Table',
-    price: 'Rs. 85,000.00',
-    image: '/images/oak-coffee-table.png',
-  },
-]
+export default function WishlistPage() {
+  const { wishlistItems, removeFromWishlist } = useWishlist();
+  const { addToCart } = useCounter();
 
-export default function Wishlist() {
+  const handleAddToCart = (item: {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+  }) => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: 1,
+      image: item.image,
+    });
+    toast.success(`${item.name} added to cart`, {
+      style: {
+        background: "#B88E2F",
+        color: "#fff",
+      },
+    });
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 font-poppins">
-      <h1 className="text-3xl font-semibold mb-6">Wishlist</h1>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-4">My Wishlist</h1>
+        <div className="flex items-center text-sm">
+          <Link href="/" className="text-gray-500 hover:text-gray-700">
+            Home
+          </Link>
+          <ChevronRight className="mx-2 w-4 h-4 text-gray-500" />
+          <span className="text-gray-900">Wishlist</span>
+        </div>
+      </div>
+
       {wishlistItems.length === 0 ? (
-        <p className="text-gray-500">Your wishlist is empty.</p>
+        <div className="text-center py-8">
+          <p className="text-xl mb-4">Your wishlist is empty.</p>
+          <Link href="/shop" className="text-[#B88E2F] hover:underline">
+            Continue Shopping
+          </Link>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {wishlistItems.map((item) => (
             <div
               key={item.id}
-              className="border rounded-lg shadow-lg p-4 flex flex-col items-center space-y-4"
+              className="bg-white rounded-lg shadow-md overflow-hidden"
             >
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={150}
-                height={150}
-                className="object-cover rounded"
-              />
-              <h3 className="text-lg font-medium">{item.name}</h3>
-              <span className="text-sm text-gray-700">{item.price}</span>
-              <Link
-                href={`/product/${item.id}`}
-                className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
-              >
-                View Details
-              </Link>
-              <button className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">
-                Remove
-              </button>
+              <div className="relative h-64">
+                <Image
+                  src={item.image || "/placeholder.svg"}
+                  alt={item.name}
+                  layout="fill"
+                  objectFit="cover"
+                />
+                <button
+                  onClick={() => removeFromWishlist(item.id)}
+                  className="absolute top-2 right-2 p-1 bg-white rounded-full shadow-md"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+              <div className="p-4">
+                <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                <p className="text-[#B88E2F] font-medium mb-4">
+                  Rs. {item.price.toLocaleString()}
+                </p>
+                <button
+                  onClick={() => handleAddToCart(item)}
+                  className="w-full bg-[#B88E2F] text-white py-2 rounded hover:bg-[#A67E2B] transition-colors"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }

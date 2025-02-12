@@ -1,6 +1,7 @@
 import React from "react";
 import Pic from "@/components/assets/scandinavian-interior-mockup-wall-decal-background 1.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -24,9 +25,11 @@ const HeroSection = () => {
           Join us to explore amazing opportunities and grow your skills with
           top-notch resources.
         </p>
-        <button className="mt-4 sm:mt-6 px-4 py-2 sm:px-6 sm:py-3 bg-box-write text-white rounded-md hover:bg-blue-600 transition-all duration-300">
-          Get Started
-        </button>
+        <Link href="/shop">
+  <button className="mt-4 sm:mt-6 px-4 py-2 sm:px-6 sm:py-3 bg-box-write text-white rounded-md hover:bg-black transition-all duration-300">
+    Get Started
+  </button>
+</Link>
       </div>
     </div>
   );

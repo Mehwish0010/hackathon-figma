@@ -1,0 +1,4 @@
+"TestCaseID","Description","Steps","ExpectedResult","ActualResult","Status","Comments"
+"TC001","Verify login functionality","1. Navigate to login page; 2. Enter valid credentials; 3. Click Login","User is logged in and redirected to dashboard","User was logged in successfully","Passed","No issues"
+"TC002","Check invalid password","1. Navigate to login page; 2. Enter valid username; 3. Enter invalid password; 4. Click Login","An error message is displayed","Error message displayed as expected","Passed",""
+"TC003","Verify empty fields validation","1. Navigate to login page; 2. Click Login without entering any data","All fields show required error messages","Some errors missing","Failed","Investigate error messaging"
