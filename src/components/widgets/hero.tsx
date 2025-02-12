@@ -26,8 +26,8 @@ const HeroSection = () => {
           top-notch resources.
         </p>
         <Link href="/shop">
-  <button className="mt-4 sm:mt-6 px-4 py-2 sm:px-6 sm:py-3 bg-box-write text-white rounded-md hover:bg-black transition-all duration-300">
-    Get Started
+  <button className="mt-4 sm:mt-6 px-4 py-2 sm:px-6 sm:py-3 bg-box-write font-extrabold text-white rounded-md hover:bg-black transition-all duration-300">
+    SHOP NOW
   </button>
 </Link>
       </div>
