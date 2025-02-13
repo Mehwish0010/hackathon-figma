@@ -6,6 +6,8 @@ import { allProducts, four, full } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import { url } from 'inspector';
 import { urlFor } from '@/sanity/lib/image';
+import Swal from 'sweetalert2';
+import { addToCart } from '@/app/actions/actions';
 
 const Products = () => {
   const [product, setProduct] = useState<Product[]>([])
@@ -16,6 +18,17 @@ const Products = () => {
     }
     fetchProducts()
   },[])
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault()
+    Swal.fire({
+      position: 'top-right',
+      icon: 'success',
+      title: `${product.title} added to cart`,
+      showConfirmButton: false,
+      timer: 2000
+    })
+    addToCart({ ...product, quantity: 1, _type: 'product' })
+  }
   return (
     <div className="text-myhover mb-[100px] mt-[100px] body-font">
 
@@ -46,9 +59,14 @@ const Products = () => {
     )}
     <h1 className='text-lg font-semibold mt-4'>
       {product.title}</h1>
-      <p className='text-gray-500 mt-2 font-semibold'>
+      <p className='text-gray-500 mt-1 mb-1 font-semibold px-4'>
        ${product.price}</p>
-
+       <button
+              className=" w-40 bg-[#B88E2F] text-white px-4 py-2 rounded hover:bg-[#9c7629] transition"
+              onClick={(e) => handleAddToCart(e, product)}
+            >
+              Add to cart
+            </button>
     </div>
 ))}
      </div>

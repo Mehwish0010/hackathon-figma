@@ -52,20 +52,25 @@ const router = useRouter();
       title: 'Proceed to Checkout?',
       text: 'Please review your cart before proceeding',
       icon: 'question',
+      width: "20", // Makes the modal responsive on mobile devices
       showCancelButton: true,
       confirmButtonColor: '#B88E2F',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Checkout!'
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('cart')
-      Swal.fire('Success!', 'Your order has been processed!', 'success')
-      router.push('/checkout')
-        setCartItems([])
-
-        
+        localStorage.removeItem('cart');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your order has been processed!',
+          icon: 'success',
+          width: '40%' // Responsive width for success modal as well
+        });
+        router.push('/checkout');
+        setCartItems([]);
       }
-    })
+    });
+    
   }
 
   if (loading) return <div className="text-center py-20">Loading cart...</div>
@@ -92,7 +97,7 @@ const router = useRouter();
                     src={item.productImage ? urlFor(item.productImage).url() : ''}
                     alt={item.title}
                     fill
-                    className="object-contain p-4"
+                    className="object-cover "
                   />
                 </div>
                 
