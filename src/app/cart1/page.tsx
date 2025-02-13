@@ -35,6 +35,11 @@ const CartPage = () => {
         Swal.fire('Removed!', 'Item has been removed from cart.', 'success')
       }
     })
+ 
+  
+      
+  
+    
   }
 
   const handleQuantityChange = (id: string, quantity: number) => {
@@ -47,32 +52,36 @@ const CartPage = () => {
     return cartItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0)
   }
 const router = useRouter();
-  const handleProceed = () => {
-    Swal.fire({
-      title: 'Proceed to Checkout?',
-      text: 'Please review your cart before proceeding',
-      icon: 'question',
-      width: "20", // Makes the modal responsive on mobile devices
-      showCancelButton: true,
-      confirmButtonColor: '#B88E2F',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Checkout!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem('cart');
-        Swal.fire({
-          title: 'Success!',
-          text: 'Your order has been processed!',
-          icon: 'success',
-          width: '40%' // Responsive width for success modal as well
-        });
-        router.push('/checkout');
-        setCartItems([]);
-      }
-    });
-    
-  }
+const handleProceed = () => {
+  Swal.fire({
+    title: 'Proceed to Checkout?',
+    text: 'Please review your cart before proceeding',
+    icon: 'question',
+    customClass: {
+      popup: 'w-[90%] max-w-[500px] mx-auto p-5'
+    },
+    showCancelButton: true,
+    confirmButtonColor: '#B88E2F',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Checkout!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem('cart');
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your order has been processed!',
+        icon: 'success',
+        customClass: {
+          popup: 'w-[90%] max-w-[500px] mx-auto p-5'
+        }
+      });
+      router.push('/checkout');
+      setCartItems([]);
+    }
+  });
+};
 
+    
   if (loading) return <div className="text-center py-20">Loading cart...</div>
 
   return (
@@ -165,11 +174,12 @@ const router = useRouter();
             </div>
 
             <button 
-              onClick={handleProceed}
-              className="w-full bg-[#B88E2F] text-white py-3 rounded-md hover:bg-[#9c7629] transition-colors"
-            >
-              Proceed to Checkout
-            </button>
+  onClick={handleProceed}
+  className="w-full bg-[#B88E2F] text-white py-2 sm:py-3 px-4 rounded-md hover:bg-[#9c7629] transition-colors text-sm sm:text-base"
+>
+  Proceed to Checkout
+</button>
+
 
             <Link 
               href="/shop" 

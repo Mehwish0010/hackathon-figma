@@ -115,7 +115,7 @@ export default function Furniture() {
         </div>
 
         {/* Mobile & Tablet Layout */}
-        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-10">
           {galleryImages.map((image) => (
             <div key={image.id} className="overflow-hidden">
               <Image
