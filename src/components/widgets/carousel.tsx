@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Pic from "@/components/assets/Rectangle 24.png";
+import Link from "next/link";
 
 const SectionWithThreeDivs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,9 +34,11 @@ const SectionWithThreeDivs = () => {
           Our designers have already created many beautiful prototypes of rooms
           to inspire you.
         </p>
+        <Link href="/shop">
         <button className="px-6 py-2 mt-6 text-white bg-box-write rounded hover:bg-slate-400">
           Explore More
         </button>
+        </Link>
       </div>
 
       {/* Second Div */}

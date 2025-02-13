@@ -27,7 +27,7 @@ export default function Navbar() {
             <h4 className="font-bold text-2xl">Furniro</h4>
           </div>
 
-          <div className="hidden md:flex md:items-center sm:space-x-12">
+          <div className="hidden md:flex md:items-center sm:space-x-16">
             <Link href="/" className="text-gray-800 font-bold hover:text-gray-600 px-3 py-2 text-base font-poppinsSemiBold">
               Home
             </Link>
