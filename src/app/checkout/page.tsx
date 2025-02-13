@@ -1,17 +1,17 @@
 "use client"; // This directive ensures the component runs only on the client side in a Next.js app.
-// Install @stripe/stripe-js & @stripe/react-stripe-js
+
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { createPaymentIntent } from "./action";
-import Pic from "@/components/assets/Rectangle 1.png"
-import Logo2 from "@/components/assets/cup.png"
-import Logo3 from "@/components/assets/shipping.png"
-import Logo4 from "@/components/assets/customer-support.png"
-import Image from 'next/image';
+import Pic from "@/components/assets/Rectangle 1.png";
+import Logo2 from "@/components/assets/cup.png";
+import Logo3 from "@/components/assets/shipping.png";
+import Logo4 from "@/components/assets/customer-support.png";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Logo from "@/components/assets/Meubel House_Logos-05.png"
+import Logo from "@/components/assets/Meubel House_Logos-05.png";
 
 // Initialize Stripe with the public key from environment variables
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
@@ -44,7 +44,7 @@ function PaymentForm() {
       setErrorMessage(null);
       alert("Payment successful!"); // Notify the user
       setIsProcessing(false);
-      // You can optionally redirect the user to a success page here
+      // Optionally, redirect the user to a success page here
     }
   };
 
@@ -52,13 +52,15 @@ function PaymentForm() {
     <form onSubmit={handleSubmit}>
       {/* Stripe's payment element (handles input fields for card details, etc.) */}
       <PaymentElement />
-      <button type="submit" className="bg-yellow-600 text-white px-6 py-3 rounded-lg mt-6 hover:bg-black transition-all" 
-      disabled={!stripe || isProcessing}>
-        {isProcessing ? "Processing..." : "Pay Now"} {/* Show dynamic button text */}
-      
+      <button
+        type="submit"
+        className="bg-yellow-600 text-white px-6 py-3 rounded-lg mt-6 hover:bg-black transition-all w-full"
+        disabled={!stripe || isProcessing}
+      >
+        {isProcessing ? "Processing..." : "Pay Now"}
       </button>
       {/* Display any error messages if they occur */}
-      {errorMessage && <div style={{ color: "red", marginTop: 8 }}>{errorMessage}</div>}
+      {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
     </form>
   );
 }
@@ -69,109 +71,106 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     // When the component mounts, request a new PaymentIntent from the server
-    createPaymentIntent()
-      .then((res) => {
-          setClientSecret(res.clientSecret); // Save the client secret to state
-      })
+    createPaymentIntent().then((res) => {
+      setClientSecret(res.clientSecret); // Save the client secret to state
+    });
   }, []);
-  console.log(clientSecret);
 
   // While waiting for the client secret, show a loading message
   if (!clientSecret) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
+
   const features = [
     {
       icon: Logo2,
-      title: 'High Quality',
-      description: 'crafted from top materials'
+      title: "High Quality",
+      description: "Crafted from top materials",
     },
     {
       icon: Logo3,
-      title: 'Warranty Protection',
-      description: 'Over 2 years'
+      title: "Warranty Protection",
+      description: "Over 2 years",
     },
     {
       icon: Logo3,
-      title: 'Free Shipping',
-      description: 'Order over 150 $'
+      title: "Free Shipping",
+      description: "Order over $150",
     },
     {
       icon: Logo4,
-      title: '24 / 7 Support',
-      description: 'Dedicated support'
-    }
-  ]
-  
+      title: "24/7 Support",
+      description: "Dedicated support",
+    },
+  ];
+
   return (
     <div>
-    <div className="relative h-[300px] w-full mb-10 mt-40">
-      <Image
-        src={Pic}
-        alt="Comparison background"
-        fill
-        className="object-cover"
-        priority
-      />
-      <div className="absolute inset-0" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+      {/* Header Section */}
+      <div className="relative w-full mb-10 h-64 md:h-80 lg:h-[400px]">
         <Image
-          src={Logo}
-          alt="Logo"
-          width={70}
-          height={70}
-          quality={100}
-          className="mb-0"
+          src={Pic}
+          alt="Comparison background"
+          fill
+          className="object-cover"
+          priority
         />
-        <h1 className="text-4xl font-semibold mb-4">Checkout</h1>
-        <div className="flex items-center gap-2 text-sm">
-          <Link href="/" className="hover:underline font-bold">
-            Home
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href="/cart1" className="hover:underline font-bold"> Cart</Link>
-          <ChevronRight className="w-4 h-4 font-bold" />
-          <span className='font-bold hover:underline'>Checkout</span>
+        <div className="absolute inset-0 bg-black opacity-40" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={70}
+            height={70}
+            quality={100}
+            className="mb-2"
+          />
+          <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4">Checkout</h1>
+          <div className="flex items-center gap-2 text-sm text-black">
+            <Link href="/" className="hover:underline font-bold">
+              Home
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link href="/cart1" className="hover:underline font-bold">
+              Cart
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="font-bold hover:underlinen text-black">Checkout</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Payment Form Section */}
+      <div className="max-w-sm mx-auto px-4">
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <PaymentForm />
+        </Elements>
+      </div>
+
+      {/* Features Section */}
+      <div className="w-full mt-10 bg-[#FAF3EA] mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {features.map((feature) => (
+            <div key={feature.title} className="flex items-center gap-4">
+              <div>
+                <Image
+                  src={feature.icon}
+                  alt={feature.title}
+                  width={60}
+                  height={60}
+                  quality={100}
+                />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-[#333333] text-xl font-semibold mb-1">
+                  {feature.title}
+                </h3>
+                <p className="text-[#666666] text-base">{feature.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-    <div style={{ maxWidth: 400, margin: "0 auto" }}>
-      <h1>Checkout</h1>
-      {/* Wrap the payment form inside the Elements provider with Stripe instance and client secret */}
-      <Elements stripe={stripePromise} 
-      options={{ clientSecret }}>
-        <PaymentForm />
-      </Elements>
-    </div>
-     <div className="w-full bg-[#FAF3EA] mx-auto px-4 py-16 mt-6 pl-6 lg:pl-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-              {features.map((feature) => (
-                <div 
-                  key={feature.title} 
-                  className="flex items-center gap-4 pl-8 md:pl-0"
-                >
-                  <div className="mb-4">
-                    <Image
-                      src={feature.icon}
-                      alt={feature.title}
-                      width={60}
-                      height={60}
-                      quality={100}
-                    />
-                  </div>
-                  <div className='flex flex-col'>
-                  <h3 className="text-[#333333] text-xl font-semibold mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-[#666666] text-base">
-                    {feature.description}
-                  </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-    </div>
-
   );
 }
