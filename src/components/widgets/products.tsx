@@ -19,16 +19,22 @@ const Products = () => {
     fetchProducts()
   },[])
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
-    e.preventDefault()
+    e.preventDefault();
     Swal.fire({
       position: 'top-right',
+      toast: true,
       icon: 'success',
       title: `${product.title} added to cart`,
       showConfirmButton: false,
-      timer: 2000
-    })
-    addToCart({ ...product, quantity: 1, _type: 'product' })
+      timer: 2000,
+      customClass: {
+        popup: 'w-[90%] max-w-[300px] sm:max-w-[500px] mx-auto p-3'
+      }
+    });
+    addToCart({ ...product, quantity: 1, _type: 'product' });
   }
+  
+
   return (
     <div className="text-myhover mb-[100px] mt-[100px] body-font">
 
