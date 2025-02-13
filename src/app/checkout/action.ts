@@ -4,7 +4,7 @@ import Stripe from "stripe";
 
 export async function createPaymentIntent() {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2025-01-27.acacia",  // or the latest stable version
+    apiVersion: "2025-01-27.acacia", // or the latest stable version
   });
   try {
     // You can hardcode an amount here, e.g. $20 = 2000 in cents
