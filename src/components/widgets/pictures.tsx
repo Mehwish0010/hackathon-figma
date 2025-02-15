@@ -1,6 +1,8 @@
+'use client'
 
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import Vase from "@/components/assets/Rectangle 39.png";
 import Chair from "@/components/assets/Rectangle 37.png";
 import Kitchen from "@/components/assets/Rectangle 44.png";
@@ -15,121 +17,115 @@ const galleryImages = [
     id: '1', 
     src: Vase, 
     alt: 'Modern shelf setup with plants', 
-    width: 280, 
-    height: 200, 
-    desktopClass: 'lg:block hidden col-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3' 
+    gridClass: 'col-span-2 row-span-2'
   },
   { 
     id: '2', 
     src: Laptop, 
     alt: 'Minimalist workspace setup', 
-    width: 250, 
-    height: 300, 
-    desktopClass: 'col-span-1 lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-2' 
+    gridClass: 'col-span-2 row-span-1'
   },
   { 
     id: '3', 
     src: Chair, 
     alt: 'Vintage brown chair', 
-    width: 280, 
-    height: 100, 
-    desktopClass: 'col-span-1 lg:col-start-3 lg:col-end-5 lg:row-start-2 lg:row-end-3' 
+    gridClass: 'col-span-2 row-span-1'
   },
   { 
     id: '4', 
     src: Dinning, 
     alt: 'Small table with vase', 
-    width: 280, 
-    height: 280, 
-    desktopClass: 'col-span-1 lg:col-start-5 lg:col-end-6 lg:row-start-2 lg:row-end-3' 
+    gridClass: 'col-span-2 row-span-2'
   },
   { 
     id: '5', 
     src: Vases, 
     alt: 'Modern dining room', 
-    width: 300, 
-    height: 300, 
-    desktopClass: 'col-span-1 lg:col-start-6 lg:col-end-9 lg:row-start-1 lg:row-end-4' 
+    gridClass: 'col-span-2 row-span-1'
   },
   { 
     id: '6', 
     src: Bed, 
     alt: 'Contemporary bedroom setup', 
-    width: 450, 
-    height: 350, 
-    desktopClass: 'col-span-1 lg:col-start-9 lg:col-end-12 lg:row-start-1 lg:row-end-2' 
+    gridClass: 'col-span-2 row-span-1'
   },
   { 
     id: '7', 
     src: Kitchen, 
     alt: 'Modern kitchen counter', 
-    width: 280, 
-    height: 280, 
-    desktopClass: 'col-span-1 lg:col-start-12 lg:col-end-14 lg:row-start-1 lg:row-end-2' 
+    gridClass: 'col-span-2 row-span-2'
   },
   { 
     id: '8', 
     src: Frame, 
     alt: 'Decorative wall art', 
-    width: 280, 
-    height: 280, 
-    desktopClass: 'col-span-1 lg:col-start-9 lg:col-end-11 lg:row-start-2 lg:row-end-3' 
-  },
-  { 
-    id: '9', 
-    src: Vase, 
-    alt: 'Wall mounted shelf', 
-    width: 280, 
-    height: 280, 
-    desktopClass: 'col-span-1 lg:col-start-12 lg:col-end-14 lg:row-start-2 lg:row-end-3' 
+    gridClass: 'col-span-2 row-span-2'
   }
 ];
 
-export default function Furniture() {
+export default function Pictures() {
   return (
-    <section className="w-full py-16 md:py-24 px-4 font-poppins overflow-hidden">
-      <div className="max-w-[1920px] mx-auto">
-        <div className="text-center mb-6">
-          <h2 className="text-[#3A3A3A] text-2xl md:text-3xl font-medium mb-2">
-            Share your setup with
-          </h2>
-          <p className="text-[#616161] text-3xl md:text-4xl font-bold">
-            #FuniroFurniture
-          </p>
-        </div>
+    <section className="max-w-7xl mx-auto py-16 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-3xl font-semibold text-gray-900 mb-4">Our Gallery</h2>
+        <p className="text-gray-600">Explore our furniture collection</p>
+      </motion.div>
 
-        {/* Desktop Mosaic Layout */}
-        <div className="hidden lg:grid grid-cols-13 grid-rows-3 gap-4 h-[800px]">
-          {galleryImages.map((image) => (
-            <div key={image.id} className={`${image.desktopClass} overflow-hidden`}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                quality={100}
-                className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300"
-              />
-            </div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="relative p-8 bg-white rounded-xl shadow-2xl"
+      >
+        {/* Decorative frame elements */}
+        <div className="absolute inset-0 border-[12px] border-[#B88E2F]/10 rounded-xl" />
+        <div className="absolute inset-4 border-[2px] border-[#B88E2F]/20 rounded-lg" />
+        
+        {/* Main grid container */}
+        <div className="grid grid-cols-6 gap-4 relative z-10 p-4">
+          {galleryImages.map((image, index) => (
+            <motion.div
+              key={image.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 }}
+              className={`relative overflow-hidden rounded-lg ${image.gridClass}`}
+            >
+              <div className="group relative w-full h-full min-h-[200px]">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <motion.span
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    className="bg-white/90 px-4 py-2 rounded-full text-[#B88E2F] font-medium text-sm"
+                  >
+                    {image.alt}
+                  </motion.span>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Mobile & Tablet Layout */}
-        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {galleryImages.map((image) => (
-            <div key={image.id} className="overflow-hidden">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                quality={100}
-                className="w-full h-auto object-cover rounded-lg hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Corner decorations */}
+        <div className="absolute top-2 left-2 w-8 h-8 border-t-4 border-l-4 border-[#B88E2F]/30 rounded-tl-lg" />
+        <div className="absolute top-2 right-2 w-8 h-8 border-t-4 border-r-4 border-[#B88E2F]/30 rounded-tr-lg" />
+        <div className="absolute bottom-2 left-2 w-8 h-8 border-b-4 border-l-4 border-[#B88E2F]/30 rounded-bl-lg" />
+        <div className="absolute bottom-2 right-2 w-8 h-8 border-b-4 border-r-4 border-[#B88E2F]/30 rounded-br-lg" />
+      </motion.div>
+
+      {/* Background decorative elements */}
+      <div className="absolute -z-10 top-1/2 left-0 w-72 h-72 bg-[#B88E2F]/5 rounded-full blur-3xl" />
+      <div className="absolute -z-10 bottom-0 right-0 w-96 h-96 bg-[#B88E2F]/5 rounded-full blur-3xl" />
     </section>
   );
 }
